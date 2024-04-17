@@ -11,12 +11,18 @@ pipeline {
             steps {
                 echo "Building..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
+                withMaven {
+                    sh "mvn clean compile"
+                }
             }
         }
         stage('Validate') {
             steps {
                 echo "Validating..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
+                withMaven {
+                    sh "mvn test"
+                }
             }
         }
     }
