@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "Building..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
-                withMaven('mvn-3.9.6') {
+                withMaven(maven: 'mvn-3.9.6') {
                     sh "mvn clean compile"
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo "Validating..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
-                withMaven('mvn-3.9.6') {
+                withMaven(maven: 'mvn-3.9.6') {
                     sh "mvn test"
                 }
             }
