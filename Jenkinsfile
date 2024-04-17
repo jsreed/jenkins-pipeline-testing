@@ -1,7 +1,5 @@
 pipeline {
     agent any
-    environment {
-    }
     options { 
         preserveStashes(buildCount: 1) 
     } 
