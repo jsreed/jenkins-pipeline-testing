@@ -29,6 +29,7 @@ pipeline {
         }
         stage('Release') {
             steps {
+                script {
                  def performRelease = input message             : "Perform Maven Release?",
                                             ok                  : "Schedule Maven Release Build",
                                             submitter           : env.ALLOWED_SUBMITTER_RELEASE,
@@ -59,6 +60,7 @@ pipeline {
                 {
                     echo "Releasing..."
                 }
+               }
             }
         }
     }
