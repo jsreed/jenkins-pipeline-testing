@@ -12,7 +12,7 @@ pipeline {
                 echo "Building..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
                 withMaven(maven: 'mvn-3.9.6') {
-                    sh "mvn clean compile"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -20,8 +20,10 @@ pipeline {
             steps {
                 echo "Validating..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
-                withMaven(maven: 'mvn-3.9.6') {
-                    sh "mvn test"
+                withSonarQubeEnv('Sonar') {
+                    withMaven(maven: 'mvn-3.9.6') {
+                        sh "mvn sonar:sonar"
+                    }
                 }
             }
         }
