@@ -11,13 +11,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building...:
+                echo "Building..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
             }
         }
         stage('Validate') {
             steps {
-                echo "Validating... "
+                echo "Validating..."
                 echo "IS_RELEASE_BUILD=${params.IS_RELEASE_BUILD}"
             }
         }
