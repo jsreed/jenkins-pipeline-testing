@@ -27,5 +27,39 @@ pipeline {
                 }
             }
         }
+        stage('Release') {
+            steps {
+                 def performRelease = input message             : "Perform Maven Release?",
+                                            ok                  : "Schedule Maven Release Build",
+                                            submitter           : env.ALLOWED_SUBMITTER_RELEASE,
+                                            submitterParameter  : 'APPROVING_SUBMITTER',
+                                            parameters:
+                                            [
+                                                booleanParam
+                                                (
+                                                    defaultValue: true,
+                                                    description: '',
+                                                    name: 'Dry run only?'
+                                                ),
+                                                string
+                                                (
+                                                    defaultValue: '',
+                                                    description: '',
+                                                    name: 'Release Version'
+                                                ),
+                                                string
+                                                (
+                                                    defaultValue: '',
+                                                    description: '',
+                                                    name: 'Development version'
+                                                )
+                                            ]
+
+                if( performRelease )
+                {
+                    echo "Releasing..."
+                }
+            }
+        }
     }
 }
