@@ -28,11 +28,7 @@ pipeline {
             }
         }
         stage('Release') {
-            agent none
             steps {
-                input message: 'Do you want to release?', ok: 'Release', parameters: [
-                    booleanParam(defaultValue: false, description: 'Release this build?', name: 'RELEASE')
-                ]
                 echo "Releasing..."
             }
         }
