@@ -28,12 +28,12 @@ pipeline {
             }
         }
         stage('Release') {
-            when {
-                expression { params.IS_RELEASE_BUILD }
-            }
+            agent none
             steps {
-                sh "mvn -B release:prepare"
-                sh "mvn -B release:perform"
+                input message: 'Do you want to release?', ok: 'Release', parameters: [
+                    booleanParam(defaultValue: false, description: 'Release this build?', name: 'RELEASE')
+                ]
+                echo "Releasing..."
             }
         }
     }
